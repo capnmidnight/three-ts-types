@@ -1,3 +1,5 @@
+/// <reference types="offscreencanvas" />
+
 import { Vector2 } from './../math/Vector2';
 import { Matrix3 } from './../math/Matrix3';
 import { Source } from './Source';
@@ -12,7 +14,6 @@ import {
     TextureEncoding,
 } from '../constants';
 import { CubeTexture } from './CubeTexture';
-import { OffscreenCanvas } from '../renderers/WebGLRenderer';
 
 export interface Dimensions2D {
     width: number;

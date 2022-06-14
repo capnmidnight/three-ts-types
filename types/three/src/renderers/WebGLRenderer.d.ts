@@ -1,3 +1,5 @@
+/// <reference types="offscreencanvas" />
+
 import { Scene } from './../scenes/Scene';
 import { Camera } from './../cameras/Camera';
 import { WebGLExtensions } from './webgl/WebGLExtensions';
@@ -30,10 +32,6 @@ export interface Renderer {
     render(scene: Object3D, camera: Camera): void;
     setSize(width: number, height: number, updateStyle?: boolean): void;
 }
-
-/** This is only available in worker JS contexts, not the DOM. */
-// tslint:disable-next-line:no-empty-interface
-export interface OffscreenCanvas extends EventTarget {}
 
 export interface WebGLRendererParameters {
     /**

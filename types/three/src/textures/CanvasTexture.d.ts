@@ -1,8 +1,11 @@
+/// <reference types="offscreencanvas" />
+
 import { Texture } from './Texture';
 import { Mapping, Wrapping, TextureFilter, PixelFormat, TextureDataType } from '../constants';
-import { OffscreenCanvas } from '../renderers/WebGLRenderer';
 
-export class CanvasTexture extends Texture<HTMLCanvasElement> {
+export class CanvasTexture<
+    ImageT extends HTMLCanvasElement | OffscreenCanvas = HTMLCanvasElement | OffscreenCanvas,
+> extends Texture<ImageT> {
     /**
      * @param canvas
      * @param [format=THREE.RGBAFormat]
@@ -16,7 +19,7 @@ export class CanvasTexture extends Texture<HTMLCanvasElement> {
      * @param [encoding=THREE.LinearEncoding]
      */
     constructor(
-        canvas: HTMLCanvasElement | OffscreenCanvas,
+        canvas: ImageT,
         mapping?: Mapping,
         wrapS?: Wrapping,
         wrapT?: Wrapping,

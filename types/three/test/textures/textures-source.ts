@@ -1,3 +1,4 @@
+import 'offscreencanvas';
 import * as THREE from 'three';
 
 // part of the code is taken from https://github.com/mrdoob/three.js/pull/22846
@@ -43,8 +44,8 @@ function assertNever(_: never): void {
     }
 })();
 
-(function testCanvasTexture() {
-    const canvas = makeCanvas();
+(function testHTMLCanvasTexture() {
+    const canvas = drawCanvas(document.createElement('canvas'));
     const canvTex = new THREE.CanvasTexture(canvas);
     const img = canvTex.image; // $ExpectType HTMLCanvasElement
     if (!(img instanceof HTMLCanvasElement)) {
@@ -52,8 +53,16 @@ function assertNever(_: never): void {
     }
 })();
 
-function makeCanvas() {
-    const canvas = document.createElement('canvas');
+(function testOffscreenCanvasTexture() {
+    const canvas = drawCanvas(new OffscreenCanvas(1024, 1024));
+    const canvTex = new THREE.CanvasTexture(canvas);
+    const img = canvTex.image; // $ExpectType OffscreenCanvas
+    if (!(img instanceof OffscreenCanvas)) {
+        assertNever(img);
+    }
+})();
+
+function drawCanvas<T extends HTMLCanvasElement | OffscreenCanvas>(canvas: T): T {
     canvas.width = 1024;
     canvas.height = 1024;
     const g = canvas.getContext('2d');
